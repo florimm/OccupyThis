@@ -15,7 +15,7 @@ information please visit us at http://www.durandaljs.com
 * The main app code lives under *App* and is organized into AMD modules and HTML views.
 * Css, fonts and images can be found under *Content*.
 * Third party script libraries are located under *Scripts*.
-* Css and script library bundling has been configured in *App_Start/DurandalBundleConfig.cs*.
+* Css and script library bundling  has been configured in *App_Start/DurandalBundleConfig.cs*.
 * The *Durandal/Index* view contains the host page's html, links and script references.
 * Application startup begins with the *App/main.js*
 * Notice the differences in the way that the welcome module is declared (constructor function) vs. the flickr module (object instance).
