@@ -6,11 +6,19 @@
 
     return {
         displayName: 'Maps',
-        images: ko.observableArray([]),
-        compositionComplete:function(){
-            alert('compose');
+        markers: ko.observableArray([]),
+        map:null,
+        placeMarker: function(location) {
+            var marker = new gmaps.Marker({
+                position: location,
+                map: this.map
+            });
+            marker.push(marker);
+        },
+        compositionComplete: function () {
+            var that = this;
             var mapDiv = document.getElementById('mapcanvas');
-            var map = new gmaps.Map(mapDiv, {
+            that.map = new gmaps.Map(mapDiv, {
                 center: new gmaps.LatLng(37.4419, -122.1419),
                 zoom: 13,
                 mapTypeId: gmaps.MapTypeId.ROADMAP,
@@ -19,18 +27,11 @@
                     style: gmaps.NavigationControlStyle.SMALL
                 }
             });
-            var marker = new gmaps.Marker({
-                position: map.getCenter(),
-                map: map,
-                title: 'Click to zoom'
-            });
-            gmaps.event.addListener(marker, 'click', function () {
-                map.setZoom(8);
-                map.setCenter(marker.getPosition());
+            gmaps.event.addListener(that.map, 'click', function (event) {
+                that.placeMarker(event.latLng);
             });
         },
         activate: function () {
-            alert('actovate');
         },
         select: function (item) {
             //the app model allows easy display of modal dialogs by passing a view model
