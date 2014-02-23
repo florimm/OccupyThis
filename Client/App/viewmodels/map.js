@@ -13,11 +13,25 @@
                 position: location,
                 map: this.map
             });
-            marker.push(marker);
+            this.markers.push(marker);
         },
+        
         compositionComplete: function () {
             var that = this;
             var mapDiv = document.getElementById('mapcanvas');
+            var drawingManager = new gmaps.drawing.DrawingManager({
+                drawingMode: gmaps.drawing.OverlayType.MARKER,
+                drawingControl: true,
+                drawingControlOptions: {
+                    position: gmaps.ControlPosition.TOP_CENTER,
+                    drawingModes: [
+                        gmaps.drawing.OverlayType.MARKER,
+                        gmaps.drawing.OverlayType.POLYGON,
+                        gmaps.drawing.OverlayType.POLYLINE
+                    ]
+                }
+            });
+
             that.map = new gmaps.Map(mapDiv, {
                 center: new gmaps.LatLng(37.4419, -122.1419),
                 zoom: 13,
@@ -27,9 +41,10 @@
                     style: gmaps.NavigationControlStyle.SMALL
                 }
             });
-            gmaps.event.addListener(that.map, 'click', function (event) {
-                that.placeMarker(event.latLng);
-            });
+            drawingManager.setMap(that.map);
+            //gmaps.event.addListener(that.map, 'click', function (event) {
+            //    that.placeMarker(event.latLng);
+            //});
         },
         activate: function () {
         },

@@ -10,7 +10,7 @@
 
 define('jquery', function() { return jQuery; });
 define('knockout', ko);
-define('gmaps', ['async!http://maps.google.com/maps/api/js?v=3&sensor=false'],function () {
+define('gmaps', ['async!http://maps.google.com/maps/api/js?v=3&sensor=false&libraries=drawing'], function () {
     return window.google.maps;
 });
 
